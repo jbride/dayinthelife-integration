@@ -403,7 +403,11 @@ Try to redo this section, if any problem persists have your instructor check the
 +
 image::images/che-location-service-8080-url.png[che-location-service-8080-url, role="integr8ly-img-responsive"]
 
-. Click on the route link and this would open in a new tab. Append `/locations` to the URI.  As a result, you should receive a list of all locations.
+. Click on the route link and this would open in a new tab. 
+
+.. Append `api-doc` to the URI.  This will display the OpenAPI documentation of the RESTful service
+
+.. Replace the `api-doc` URI context with `/locations`.  As a result, you should receive a list of all locations.
 +
 image::images/che-location-service-test.png[che-location-service-test, role="integr8ly-img-responsive"]
 

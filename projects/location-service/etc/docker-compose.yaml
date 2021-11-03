@@ -20,6 +20,22 @@ services:
     networks:
       - default
 
+  location-service:
+    image: quay.io/jbride/fuse-location-service:0.0.1
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      JAVA_MAX_MEM_RATIO: '60'
+      JAVA_INITIAL_MEM_RATIO: '0'
+      GC_MAX_METASPACE_SIZE: '500'
+    volumes:
+    - ./fuse-location-service:/deployments/config:bind
+    depends_on:
+      - psql-location
+    networks:
+      - default
+
 networks:
   default:
     driver: bridge
