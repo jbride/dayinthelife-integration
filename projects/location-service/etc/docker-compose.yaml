@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+
+  psql-location:
+    image: registry.redhat.io/rhel8/postgresql-12:1-72.1626836556
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      PGPORT: 5432
+      POSTGRESQL_USER: dbuser
+      POSTGRESQL_PASSWORD: password
+      POSTGRESQL_DATABASE: sampledb
+      POSTGRESQL_MAX_PREPARED_TRANSACTIONS: 10
+      SCRIPT_DIR: /opt/sql
+    volumes:
+    - ../src/main/resources/schema.sql:/opt/sql/schema.sql:bind
+    - ./location-service/seed-database.sh:/opt/app-root/src/postgresql-start/seed_database.sh:bind
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
