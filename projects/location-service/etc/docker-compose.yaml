@@ -16,7 +16,7 @@ services:
       SCRIPT_DIR: /opt/sql
     volumes:
     - ../src/main/resources/schema.sql:/opt/sql/schema.sql:bind
-    - ./location-service/seed-database.sh:/opt/app-root/src/postgresql-start/seed_database.sh:bind
+    - ./fuse-location-service/seed-database.sh:/opt/app-root/src/postgresql-start/seed_database.sh:bind
     networks:
       - default
 
@@ -29,6 +29,7 @@ services:
       JAVA_MAX_MEM_RATIO: '60'
       JAVA_INITIAL_MEM_RATIO: '0'
       GC_MAX_METASPACE_SIZE: '500'
+      SPRING_CONFIG_LOCATION: "file:///deployments/config/application.properties"
     volumes:
     - ./fuse-location-service:/deployments/config:bind
     depends_on:
