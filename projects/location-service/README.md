@@ -4,13 +4,56 @@ This example demonstrates how you can use Apache Camel with Spring Boot.
 
 The quickstart uses Spring Boot to configure a little application that includes a Camel route that triggers a message every 5th second, and routes the message to a log.
 
-### Building
+## Reference
+
+1. [Getting Started With Fuse on Spring Boot](https://access.redhat.com/documentation/en-us/red_hat_fuse/7.9/html-single/getting_started_with_fuse_on_spring_boot/index)
+
+## Creation
+
+A Fuse on SpringBoot seed project can be generated from either the *Launcher* or via a maven archetype:
+
+1. https://developers.redhat.com/launch :
+   ![launcher](docs/fuse_launcher.png)
+
+## Building
 
 The example can be built with
 
     mvn clean install
 
-### Running the example in OpenShift
+## Running the example in docker-compose
+
+1. Start-up:
+
+    $ docker-compose -f etc/docker-compose.yaml up -d
+
+1.  View pods:
+
+    $ podman ps -a
+
+1.  Get all locations:
+
+    $ curl -v localhost:8080/locations | jq .
+
+1. Shut-down:
+
+    $ docker-compose -f etc/docker-compose.yaml down
+
+
+## Deploy Application in OCP using Ansible
+
+1. $ cd ansible
+
+1. install:
+
+    $ ansible-playbook playbooks/install.yml
+
+1. uninstall:
+
+    $ ansible-playbook playbooks/install.yml -e ACTION=uninstall
+
+## OLD
+### Running the example in OpenShift using Fabric 8 maven plugin
 
 It is assumed that:
 - OpenShift platform is already running, if not you can find details how to [Install OpenShift at your site](https://docs.openshift.com/container-platform/3.3/install_config/index.html).
