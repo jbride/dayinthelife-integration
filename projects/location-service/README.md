@@ -7,6 +7,7 @@ The quickstart uses Spring Boot to configure a little application that includes 
 ## Reference
 
 1. [Getting Started With Fuse on Spring Boot](https://access.redhat.com/documentation/en-us/red_hat_fuse/7.9/html-single/getting_started_with_fuse_on_spring_boot/index)
+1. [Fuse on OpenShift](https://access.redhat.com/documentation/en-us/red_hat_fuse/7.5/html/fuse_on_openshift_guide/spring-boot-image-application)
 
 ## Creation
 
@@ -14,6 +15,19 @@ A Fuse on SpringBoot seed project can be generated from either the *Launcher* or
 
 1. https://developers.redhat.com/launch :
    ![launcher](docs/fuse_launcher.png)
+
+1. Maven archetype:
+
+    $ FABRIC8_VERSION=2.2.0.fuse-sb2-790047-redhat-00004
+
+    $ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate \
+        -DarchetypeCatalog=https://maven.repository.redhat.com/ga/io/fabric8/archetypes/archetypes-catalog/$FABRIC8_VERSION/archetypes-catalog-$FABRIC8_VERSION-archetype-catalog.xml \
+       -DarchetypeGroupId=org.jboss.fuse.fis.archetypes \
+       -DarchetypeArtifactId=spring-boot-camel-archetype \
+       -DarchetypeVersion=$FABRIC8_VERSION \
+       -DgroupId=com.redhat.naps \
+       -DartifactId=location-service \
+       -Dversion=1.0.0
 
 ## Building
 
@@ -34,6 +48,11 @@ The example can be built with
 1.  Get all locations:
 
     $ curl -v localhost:8080/locations | jq .
+
+1.  Kill containerized location service and run springboot directly:
+
+    $ podman rm -f etc_location-service_1
+    $ mvn spring-boot:run
 
 1. Shut-down:
 
